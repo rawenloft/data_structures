@@ -5,6 +5,7 @@ def gcd(m, n):
         
         m = old_n
         n = old_m % old_n
+        
     return n
 
 class Fraction:
@@ -31,7 +32,7 @@ class Fraction:
     
     def invert(self, fraction):
         return Fraction(fraction.den, fraction.num)
-    
+
     def __add__(self, other_fraction):
         newnum = self.num * other_fraction.den + self.den * other_fraction.num
         newden = self.den * other_fraction.den
@@ -44,6 +45,18 @@ class Fraction:
          second_num = other.num * self.den
          
          return first_num == second_num   
+    
+    def __lt__(self, other):
+        if self.den == other.den:
+            return self if self.num < other.num else other
+        return self if self.num * other.den < other.num * self.den else other
+    
+        print(lcm)
+        
+    def __gt__(self, other):
+        if self.den == other.den:
+            return self if self.num > other.num else other
+        return self if self.num * other.den > other.num * self.den else other
     
     def __sub__(self, other_fraction):
         return self + Fraction(- other_fraction.num, other_fraction.den)
@@ -61,9 +74,9 @@ class Fraction:
     def __repr__(self) -> str:
         return "{}/{}".format(self.num, self.den)
     
-x = Fraction(5,7)
+x = Fraction(5,18)
 
-y = Fraction(5,7)
+y = Fraction(11,36)
 
 res = x + y
 print(res)
@@ -71,3 +84,5 @@ print(x - y)
 print(x * y)
 print(x / y)
 print( x == y)
+print(x > y)
+print(x < y)
